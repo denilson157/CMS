@@ -15,3 +15,26 @@ function change_login_message()
 {
     return "Invalid Credentials";
 }
+
+add_action('wp_head', 'put_og_tags');
+
+function put_og_tags()
+{
+    if (is_single()) {
+
+        $post_data = get_post(get_the_ID());
+
+        $abstract = $post_data->post_excerpt;
+
+        $post_title = $post_data->post_title;
+
+        $site_name = get_bloginfo();
+
+        echo "\n\n\n
+        <meta property='og:title' content='$post_title'> </meta>
+        <meta property='og:site_name' content='" . $site_name . "'> </meta>
+        <meta property='og:url' content='" . get_permalink() . "'> </meta>
+        <meta property='og:description' content='$abstract'> </meta>
+        \n\n\n";
+    }
+}
