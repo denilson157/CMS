@@ -10,7 +10,7 @@
             <br><br>
         </div>
 
-        <?php submit_button() ?>
+        <?php submit_button()  ?>
 
     </form>
 </div>
