@@ -9,6 +9,13 @@ Author URI: https://sp.senac.br
 License: CC By
 */
 
+add_action('admin_init', 'set_configs');
+
+function set_configs(){
+    register_setting('configs-exemplo','api-token');
+    register_setting('configs-exemplo','api-url');
+}
+
 add_action('admin_menu', 'my_menu_plugin');
 
 

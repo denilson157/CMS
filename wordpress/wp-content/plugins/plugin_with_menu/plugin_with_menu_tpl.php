@@ -1,14 +1,18 @@
 <div class="wrap">
     <h1>Configurations My plugin</h1>
     <form method="post" action="options.php">
-        <div class="row">
-            <label for="token_api">Token da API</label>
-            <input type="text" name="token_api" id="token_api">
-            <br><br>
-            <label for="url_api">URL da API</label>
-            <input type="text" class="form-control form-control-sm" name="url_api" id="url_api">
-            <br><br>
-        </div>
+
+        <?php
+            settings_fields('configs-exemplo');
+            do_settings_sections('configs-exemplo');
+        ?>
+
+        <label for="token_api">Token da API</label>
+        <input type="text" name="api-token" id="api-token" value="<?php echo get_option('api-token');?>">
+        <br><br>
+        <label for="url_api">URL da API</label>
+        <input type="text" name="api-url" id="api-url" value="<?php echo get_option('api-url');?>">
+        <br><br>
 
         <?php submit_button() ?>
 
