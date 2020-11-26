@@ -57,6 +57,39 @@ function abre_config()
         $wpdb->query("DELETE FROM {$wpdb->prefix}agenda WHERE id = $id");
     }
 
+    if (isset($_GET['editar']) && !isset($_POST['alterar'])) {
+        $id = preg_replace('/\D/', '', $_GET['editar']);
+
+        $contato = $wpdb->get_results("SELECT
+                                    nome, whatsapp
+                                FROM
+                                    {$wpdb->prefix}agenda
+                                WHERE
+                                    id = $id");
+
+        require 'edit_form_tpl.php';
+        exit();
+    }
+
+    if (isset($_POST['alterar'])) {
+        if ($wpdb->query($wpdb->prepare(
+            "UPDATE 
+                                            {$wpdb->prefix}agenda
+                                        SET
+                                            nome = %s, whatsapp = %d
+                                        WHERE
+                                            id = %d",
+            $_POST['nome'],
+            $_POST['whatsapp'],
+            $_POST['id']
+        ))) {
+            $msg_alterar = 'Registro alterado com sucesso';
+        } else {
+            echo $wpdb->print_error();
+            $erro_alterar = 'Erro ao tentar alterar registro';
+        }
+    }
+
     if (isset($_POST['submit'])) {
         if ($_POST['submit'] == 'Salvar') {
             $wpdb->query($wpdb->prepare("INSERT INTO 

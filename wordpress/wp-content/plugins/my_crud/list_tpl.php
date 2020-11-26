@@ -4,6 +4,14 @@
     <br><br>
 
     <form method="post">
+        <?php
+        if (isset($msg_alterar)) {
+            echo "<font color='green'> $msg_alterar </font>";
+        } else {
+            echo "<font color='red'> $erro_alterar </font>";
+        }
+        ?>
+        <br><br>
         <table border="1" width="50%">
             <tr>
                 <td>Nome</td>
@@ -17,6 +25,7 @@
                                 <td>{$value->nome}</td>
                                 <td>{$value->whatsapp}</td>
                                 <td><a href='?page={$_GET['page']}&apagar={$value->id}'>Apagar</a></td>
+                                <td><a href='?page={$_GET['page']}&editar={$value->id}'>Editar</a></td>
                             </tr>";
             }
             ?>
